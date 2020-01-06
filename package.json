@@ -1,0 +1,30 @@
+{
+  "name": "recibo",
+  "version": "0.1.0",
+  "description": "Sistema simples para emissão de recibo de balcão",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "cucumber": "^6.0.5",
+    "puppeteer": "^2.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gleiderr/recibo.git"
+  },
+  "keywords": [
+    "recibo",
+    "react",
+    "reactjs",
+    "cucumber"
+  ],
+  "author": "gleiderr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gleiderr/recibo/issues"
+  },
+  "homepage": "https://github.com/gleiderr/recibo#readme"
+}
