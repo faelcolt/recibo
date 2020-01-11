@@ -4,18 +4,18 @@ import './Recibo.css';
 function Recibo() {
     return (
         <>
-            <input type="file" name="imagem" />
+            <input type='file' name='imagem' />
 
-            <label for="nome">Cliente</label>
-            <input type="text" name="nome" id="nome" />
+            <label for='nome'>Cliente</label>
+            <input type='text' name='nome' id='nome' />
 
-            <label for="endereço">Endereço</label>
-            <input type="text" name="endereço" id="endereço" />
+            <label for='endereço'>Endereço</label>
+            <input type='text' name='endereço' id='endereço' />
 
-            <label for="telefone">Telefone:</label>
-            <input type="tel" name="telefone" id="telefone" />
+            <label for='telefone'>Telefone:</label>
+            <input type='tel' name='telefone' id='telefone' />
 
-            <input type="date" name="data" id="data" />
+            <input type='date' name='data' id='data' />
 
             <table>
                 <thead>
