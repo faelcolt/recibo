@@ -35,6 +35,10 @@ Given('todos os campos identificados', async function() {
     }
 });
 
+Given('a tabela identificada', async function() {
+    this.tabela = await this.page.$('table');
+});
+
 Then('devem existir os campos: {string}', async function(campos) {
     this.fields = campos.split(',').map(f => f.trim());
     for (const field of this.fields) {
@@ -44,10 +48,68 @@ Then('devem existir os campos: {string}', async function(campos) {
 
 Then('os campos devem estar vazios', async function() {
     for (const field of this.fields) {
-        const value = await this.campos[field].evaluate(c => c.value);
         assert.ok(
-            value === undefined || value === '',
-            `Campo ${field} deveria estar vazio, mas está com ${value}`
+            await campoVazio(this.campos[field]),
+            `Campo ${field} deveria estar vazio.`
         );
     }
 });
+
+Then('a tabela deve conter cabeçalho com {string}', async function(expected) {
+    const cabeçalhosEsperados = expected.split(',').map(s => s.trim());
+    const cabeçalhoTabela = await this.tabela.$('thead');
+    const cabeçalhosColunas = await cabeçalhoTabela.$$eval('th', elements => {
+        return elements.map(e => e.innerText);
+    });
+
+    for (const esperado of cabeçalhosEsperados) {
+        assert.ok(
+            cabeçalhosColunas.some(coluna => coluna === esperado),
+            `${esperado} não identificado`
+        );
+    }
+});
+
+Then('o corpo da tabela deve ter sete linhas', async function() {
+    const corpo = await this.tabela.$('tbody');
+    this.linhas = await corpo.$$('tr');
+    assert.equal(
+        this.linhas.length,
+        7,
+        `O corpo da tabela está com ${this.linhas.length} linhas.`
+    );
+});
+
+Then('cada linha deve ter quatro campos vazios', async function() {
+    for (let i = 0; i < this.linhas.length; i++) {
+        const linha = this.linhas[i];
+        const campos = await linha.$$('input');
+
+        assert.equal(
+            campos.length,
+            4,
+            `A linha ${i} possui ${campos.length} campos.`
+        );
+
+        for (let j = 0; j < campos.length; j++) {
+            const campo = campos[j];
+            assert(await campoVazio(campo), `campo ${j} da linha ${i}.`);
+        }
+    }
+});
+
+Then('o rodapé deve ter uma linha contendo {string}', async function(expected) {
+    this.rodapé = await this.tabela.$('tfoot');
+    const texto = await this.rodapé.$eval('tr', el => el.innerText.trim());
+    assert.equal(texto, expected, `${texto} != ${expected}`);
+});
+
+Then('um campo de total geral vazio', async function() {
+    const campo = await this.rodapé.$('input');
+    assert.ok(await campoVazio(campo), `Campo não vazio.`);
+});
+
+async function campoVazio(campo) {
+    const value = await campo.evaluate(c => c.value);
+    return value === undefined || value === '';
+}

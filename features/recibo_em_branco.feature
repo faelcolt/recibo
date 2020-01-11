@@ -5,10 +5,12 @@ Funcionalidade: Recibo em Branco
     Cenário: Recibo em branco
         Dada a página de recibo acessada
         E todos os campos identificados
+        E a tabela identificada
         Então devem existir os campos: "imagem, nome, endereço, telefone, data"
         Então os campos devem estar vazios
-        E a tabela de produtos deve ter cabeçalho contendo "Quantidade, Descrição, Valor Unitário, Total"
-        E deve ter sete linhas com campos vazios
-        E deve ter uma linha contendo "Total Geral"
+        E a tabela deve conter cabeçalho com "Quantidade, Descrição, Valor Unitário, Valor Total"
+        E o corpo da tabela deve ter sete linhas 
+        E cada linha deve ter quatro campos vazios
+        E o rodapé deve ter uma linha contendo "Total Geral"
         E um campo de total geral vazio
 

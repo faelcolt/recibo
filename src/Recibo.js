@@ -20,7 +20,7 @@ function Recibo() {
             <table>
                 <thead>
                     <tr>
-                        <th>Qtd.</th>
+                        <th>Quantidade</th>
                         <th>Descrição</th>
                         <th>Valor Unitário</th>
                         <th>Valor Total</th>
@@ -36,10 +36,14 @@ function Recibo() {
                     {<Linha />}
                 </tbody>
                 <tfoot>
-                    <td></td>
-                    <td></td>
-                    <td>Total</td>
-                    <td>R$ 190,00</td>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Total Geral</td>
+                        <td>
+                            <input />
+                        </td>
+                    </tr>
                 </tfoot>
             </table>
         </>
@@ -49,10 +53,18 @@ function Recibo() {
 function Linha() {
     return (
         <tr>
-            <td>50</td>
-            <td>Lixadeira Vonder 750W 220V</td>
-            <td>R$ 190,00</td>
-            <td>R$ 190,00</td>
+            <td>
+                <input type='text' />
+            </td>
+            <td>
+                <input type='text' />
+            </td>
+            <td>
+                <input type='text' />
+            </td>
+            <td>
+                <input type='text' />
+            </td>
         </tr>
     );
 }
