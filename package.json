@@ -1,54 +1,57 @@
 {
-  "name": "recibo",
-  "version": "0.1.0",
-  "description": "Sistema simples para emissão de recibo de balcão",
-  "homepage": "https://github.com/gleiderr/recibo#readme",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gleiderr/recibo/issues"
-  },
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0"
-  },
-  "devDependencies": {
-    "cucumber": "^6.0.5",
-    "prettier": "1.19.1",
-    "puppeteer": "^2.0.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "cucumber-js",
-    "eject": "react-scripts eject"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gleiderr/recibo.git"
-  },
-  "keywords": [
-    "recibo",
-    "react",
-    "reactjs",
-    "cucumber"
-  ],
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+    "name": "recibo",
+    "version": "0.1.0",
+    "description": "Sistema simples para emissão de recibo de balcão",
+    "homepage": "https://github.com/gleiderr/recibo",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/gleiderr/recibo/issues"
+    },
+    "dependencies": {
+        "@testing-library/jest-dom": "^4.2.4",
+        "@testing-library/react": "^9.4.0",
+        "@testing-library/user-event": "^7.2.1",
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0",
+        "react-scripts": "3.3.0"
+    },
+    "devDependencies": {
+        "cucumber": "^6.0.5",
+        "gh-pages": "^2.2.0",
+        "prettier": "1.19.1",
+        "puppeteer": "^2.0.0"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "cucumber-js",
+        "eject": "react-scripts eject",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gleiderr/recibo.git"
+    },
+    "keywords": [
+        "recibo",
+        "react",
+        "reactjs",
+        "cucumber"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
 }
