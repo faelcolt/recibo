@@ -24,23 +24,23 @@ Given('a página de recibo acessada', async function() {
     await this.page.goto('http://localhost:3000');
 });
 
-Given('todos os campos identificados', async function() {
+Then('deve existir uma imagem no cabeçalho', async function() {
+    const imagem = await this.page.$('img');
+    assert.ok(!!imagem);
+});
+
+Then('no cabeçalho devem existir campos para: {string}', async function(
+    expectd
+) {
     const campos = await this.page.$$('input');
-    //console.log(campos.length, await campos[0].getProperties());
 
     this.campos = {};
     for (const campo of campos) {
         const name = await campo.evaluate(node => node.name);
         this.campos[name] = campo;
     }
-});
 
-Given('a tabela identificada', async function() {
-    this.tabela = await this.page.$('table');
-});
-
-Then('devem existir os campos: {string}', async function(campos) {
-    this.fields = campos.split(',').map(f => f.trim());
+    this.fields = expectd.split(',').map(f => f.trim());
     for (const field of this.fields) {
         assert.ok(!!this.campos[field], `Campo ${field} não existe.`);
     }
@@ -56,6 +56,8 @@ Then('os campos devem estar vazios', async function() {
 });
 
 Then('a tabela deve conter cabeçalho com {string}', async function(expected) {
+    this.tabela = await this.page.$('table');
+
     const cabeçalhosEsperados = expected.split(',').map(s => s.trim());
     const cabeçalhoTabela = await this.tabela.$('thead');
     const cabeçalhosColunas = await cabeçalhoTabela.$$eval('th', elements => {
