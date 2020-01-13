@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/gleiderr/recibo/static/css/main.a51a59f8.chunk.css",
-    "main.js": "/gleiderr/recibo/static/js/main.bfe60817.chunk.js",
-    "main.js.map": "/gleiderr/recibo/static/js/main.bfe60817.chunk.js.map",
-    "runtime-main.js": "/gleiderr/recibo/static/js/runtime-main.63111be0.js",
-    "runtime-main.js.map": "/gleiderr/recibo/static/js/runtime-main.63111be0.js.map",
-    "static/js/2.1549f768.chunk.js": "/gleiderr/recibo/static/js/2.1549f768.chunk.js",
-    "static/js/2.1549f768.chunk.js.map": "/gleiderr/recibo/static/js/2.1549f768.chunk.js.map",
-    "index.html": "/gleiderr/recibo/index.html",
-    "precache-manifest.8576a42c921f0b4816526f1462976f30.js": "/gleiderr/recibo/precache-manifest.8576a42c921f0b4816526f1462976f30.js",
-    "service-worker.js": "/gleiderr/recibo/service-worker.js",
-    "static/css/main.a51a59f8.chunk.css.map": "/gleiderr/recibo/static/css/main.a51a59f8.chunk.css.map",
-    "static/js/2.1549f768.chunk.js.LICENSE": "/gleiderr/recibo/static/js/2.1549f768.chunk.js.LICENSE",
-    "static/media/cabecalho.jpeg": "/gleiderr/recibo/static/media/cabecalho.bb76dfc9.jpeg"
+    "main.css": "/recibo/static/css/main.f43b8bd1.chunk.css",
+    "main.js": "/recibo/static/js/main.de501c90.chunk.js",
+    "main.js.map": "/recibo/static/js/main.de501c90.chunk.js.map",
+    "runtime-main.js": "/recibo/static/js/runtime-main.c4d4ced2.js",
+    "runtime-main.js.map": "/recibo/static/js/runtime-main.c4d4ced2.js.map",
+    "static/js/2.1549f768.chunk.js": "/recibo/static/js/2.1549f768.chunk.js",
+    "static/js/2.1549f768.chunk.js.map": "/recibo/static/js/2.1549f768.chunk.js.map",
+    "index.html": "/recibo/index.html",
+    "precache-manifest.ad99127f65242e60dc0a5d2be942c694.js": "/recibo/precache-manifest.ad99127f65242e60dc0a5d2be942c694.js",
+    "service-worker.js": "/recibo/service-worker.js",
+    "static/css/main.f43b8bd1.chunk.css.map": "/recibo/static/css/main.f43b8bd1.chunk.css.map",
+    "static/js/2.1549f768.chunk.js.LICENSE": "/recibo/static/js/2.1549f768.chunk.js.LICENSE",
+    "static/media/cabecalho.jpeg": "/recibo/static/media/cabecalho.bb76dfc9.jpeg"
   },
   "entrypoints": [
-    "static/js/runtime-main.63111be0.js",
+    "static/js/runtime-main.c4d4ced2.js",
     "static/js/2.1549f768.chunk.js",
-    "static/css/main.a51a59f8.chunk.css",
-    "static/js/main.bfe60817.chunk.js"
+    "static/css/main.f43b8bd1.chunk.css",
+    "static/js/main.de501c90.chunk.js"
   ]
 }
