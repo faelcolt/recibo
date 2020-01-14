@@ -2,7 +2,7 @@
     "name": "recibo",
     "version": "0.1.0",
     "description": "Sistema simples para emissão de recibo de balcão",
-    "homepage": "https://github.com/gleiderr/recibo",
+    "homepage": "https://gleiderr.github.io/recibo",
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/gleiderr/recibo/issues"
