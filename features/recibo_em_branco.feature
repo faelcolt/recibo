@@ -15,3 +15,6 @@ Funcionalidade: Recibo em Branco
         E cada linha deve ter quatro campos vazios
         E o rodapé deve ter uma linha contendo "Total Geral" vazio
 
+    Cenário: Recibo em branco para rápido preenchimento
+        Dada a página de recibo acessada em um dispositivo 320 x 568
+        Então a tabela deve estar em um componente de no máximo 320px
