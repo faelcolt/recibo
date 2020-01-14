@@ -6,7 +6,7 @@ function Recibo() {
     const data = new Date();
     const ano = data.getFullYear();
     const mes = data.getMonth() + 1;
-    const dia = data.getDay();
+    const dia = data.getDate();
     const hoje = `${ano}-${mes < 10 ? '0' + mes : mes}-${
         dia < 10 ? '0' + dia : dia
     }`;
