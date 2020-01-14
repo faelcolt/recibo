@@ -3,18 +3,8 @@ import './Recibo.css';
 import cabeçalho from './images/cabecalho.jpeg';
 
 function Recibo() {
-    const data = new Date();
-    const ano = data.getFullYear();
-    const mes = data.getMonth() + 1;
-    const dia = data.getDate();
-    const hoje = `${ano}-${mes < 10 ? '0' + mes : mes}-${
-        dia < 10 ? '0' + dia : dia
-    }`;
-
-    console.log(hoje);
-
     return (
-        <>
+        <div style={{ margin: '8px' }}>
             <input type='file' name='imagem' style={{ display: 'none' }} />
 
             <div style={{ width: '100%' }}>
@@ -25,6 +15,23 @@ function Recibo() {
                 />
             </div>
 
+            <Cabecalho />
+            <Tabela />
+        </div>
+    );
+}
+
+function Cabecalho() {
+    const p2 = p => (p < 10 ? '0' + p : p);
+
+    const data = new Date();
+    const ano = data.getFullYear();
+    const mes = p2(data.getMonth() + 1);
+    const dia = p2(data.getDate());
+    const hoje = `${dia}/${mes}/${ano}`;
+
+    return (
+        <>
             <div style={{ display: 'flex' }}>
                 <label htmlFor='nome'>Cliente: </label>
                 <input type='text' name='nome' id='nome' style={{ flex: 1 }} />
@@ -46,12 +53,24 @@ function Recibo() {
                     type='tel'
                     name='telefone'
                     id='telefone'
-                    style={{ flex: 1 }}
+                    style={{ minWidth: '120px', flex: '1 1 100%' }}
                 />
 
-                <input type='date' name='data' id='data' defaultValue={hoje} />
+                <input
+                    type='text'
+                    name='data'
+                    id='data'
+                    defaultValue={hoje}
+                    style={{ minWidth: '85px' }}
+                />
             </div>
+        </>
+    );
+}
 
+function Tabela() {
+    return (
+        <div style={{ overflow: 'auto' }}>
             <table>
                 <colgroup>
                     <col style={{ width: '10%' }} />
@@ -91,7 +110,7 @@ function Recibo() {
                     </tr>
                 </tfoot>
             </table>
-        </>
+        </div>
     );
 }
 
