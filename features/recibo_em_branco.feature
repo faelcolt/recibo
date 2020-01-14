@@ -1,8 +1,8 @@
 # language: pt
 Funcionalidade: Recibo em Branco
-    Paulo deseja ter seu recibo sempre disponível para preenchimento e para posterior impressão.
+    Paulo deseja ter um recibo sempre limpo para preenchimento e para posterior impressão.
 
-    Cenário: Recibo em branco
+    Cenário: Recibo em branco para rápido preenchimento
         Dada a página de recibo acessada
         Então a página deve ter o título "Recibo"
         E a tabela deve conter cabeçalho com "Qtd., Descrição, Valor Unitário, Valor Total"
