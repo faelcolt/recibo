@@ -8,6 +8,8 @@ Funcionalidade: Recibo em Branco
         E a página deve possuir uma margem de 8px
         E os campos devem possuir texto de tamanho 16px
         E deve existir uma imagem no cabeçalho
+        E no cabeçalho devem existir campos vazios para: "imagem, nome, endereço, telefone"
+        E o campo data deve conter a data de hoje
         E a tabela deve conter cabeçalho com "Qtd., Descrição, Valor Unitário, Valor Total"
         E o corpo da tabela deve ter sete linhas 
         E cada linha deve ter quatro campos vazios
