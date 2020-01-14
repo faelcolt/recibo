@@ -13,6 +13,5 @@ Funcionalidade: Recibo em Branco
         E a tabela deve conter cabeçalho com "Qtd., Descrição, Valor Unitário, Valor Total"
         E o corpo da tabela deve ter sete linhas 
         E cada linha deve ter quatro campos vazios
-        E o rodapé deve ter uma linha contendo "Total Geral"
-        E um campo de total geral vazio
+        E o rodapé deve ter uma linha contendo "Total Geral" vazio
 
