@@ -73,8 +73,12 @@ function Cabecalho() {
 }
 
 function Tabela() {
+    const linhas = [];
+    for (let i = 0; i < 18; i++) {
+        linhas.push(<Linha />);
+    }
     return (
-        <div style={{ overflow: 'auto' }}>
+        <div style={{ overflow: 'auto', marginTop: '8px' }}>
             <table>
                 <colgroup>
                     <col style={{ width: '10%' }} />
@@ -90,15 +94,7 @@ function Tabela() {
                         <th className='number-format'>Valor Total</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {<Linha />}
-                    {<Linha />}
-                    {<Linha />}
-                    {<Linha />}
-                    {<Linha />}
-                    {<Linha />}
-                    {<Linha />}
-                </tbody>
+                <tbody>{linhas}</tbody>
                 <tfoot>
                     <tr>
                         <th
