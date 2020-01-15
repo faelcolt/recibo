@@ -1,6 +1,7 @@
 .main {
     padding: 8px;
     margin: auto;
+    max-width: 680px;
 }
 label {
     font-weight: 700;
