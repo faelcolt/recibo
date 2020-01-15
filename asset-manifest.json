@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/recibo/static/css/main.9e5d4680.chunk.css",
-    "main.js": "/recibo/static/js/main.cdceeaa4.chunk.js",
-    "main.js.map": "/recibo/static/js/main.cdceeaa4.chunk.js.map",
+    "main.css": "/recibo/static/css/main.195af385.chunk.css",
+    "main.js": "/recibo/static/js/main.9a9a0500.chunk.js",
+    "main.js.map": "/recibo/static/js/main.9a9a0500.chunk.js.map",
     "runtime-main.js": "/recibo/static/js/runtime-main.c4d4ced2.js",
     "runtime-main.js.map": "/recibo/static/js/runtime-main.c4d4ced2.js.map",
     "static/js/2.1549f768.chunk.js": "/recibo/static/js/2.1549f768.chunk.js",
     "static/js/2.1549f768.chunk.js.map": "/recibo/static/js/2.1549f768.chunk.js.map",
     "index.html": "/recibo/index.html",
-    "precache-manifest.aff69e1459afa7dd2bc0d73969c9b0a4.js": "/recibo/precache-manifest.aff69e1459afa7dd2bc0d73969c9b0a4.js",
+    "precache-manifest.57d4b936ce32c36e4fd949d86b77d983.js": "/recibo/precache-manifest.57d4b936ce32c36e4fd949d86b77d983.js",
     "service-worker.js": "/recibo/service-worker.js",
-    "static/css/main.9e5d4680.chunk.css.map": "/recibo/static/css/main.9e5d4680.chunk.css.map",
+    "static/css/main.195af385.chunk.css.map": "/recibo/static/css/main.195af385.chunk.css.map",
     "static/js/2.1549f768.chunk.js.LICENSE": "/recibo/static/js/2.1549f768.chunk.js.LICENSE",
-    "static/media/cabecalho.jpeg": "/recibo/static/media/cabecalho.bb76dfc9.jpeg"
+    "static/media/cabecalho.jpeg": "/recibo/static/media/cabecalho.e4122c13.jpeg"
   },
   "entrypoints": [
     "static/js/runtime-main.c4d4ced2.js",
     "static/js/2.1549f768.chunk.js",
-    "static/css/main.9e5d4680.chunk.css",
-    "static/js/main.cdceeaa4.chunk.js"
+    "static/css/main.195af385.chunk.css",
+    "static/js/main.9a9a0500.chunk.js"
   ]
 }
