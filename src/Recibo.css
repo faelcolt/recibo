@@ -3,6 +3,26 @@
     margin: auto;
     max-width: 680px;
 }
+
+#imprimir {
+    display: flex;
+    margin: 4px;
+    margin-left: auto;
+    padding: 8px;
+
+    border: none;
+    color: white;
+    background-color: #00695c;
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+        0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+@media print {
+    #imprimir {
+        display: none;
+    }
+}
+
 label {
     font-weight: 700;
     white-space: pre-wrap;

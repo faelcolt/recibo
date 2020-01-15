@@ -5,6 +5,10 @@ import cabeçalho from './images/cabecalho.jpeg';
 function Recibo() {
     return (
         <div class='main'>
+            <button id='imprimir' onClick={() => window.print()}>
+                Imprimir
+            </button>
+
             <input type='file' name='imagem' style={{ display: 'none' }} />
 
             <div style={{ width: '100%' }}>

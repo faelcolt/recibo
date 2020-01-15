@@ -7,6 +7,7 @@ Funcionalidade: Recibo em Branco
         Então a página deve ter o título "Recibo"
         E a página deve possuir uma margem mínima de 8px
         E a página deve possuir largura máxima de 680px
+        E a página possui botão imprimir que invoca impressão do navegador
         E os campos devem possuir texto de tamanho 16px
         E deve existir uma imagem no cabeçalho
         E no cabeçalho devem existir campos vazios para: "imagem, nome, endereço, telefone"
