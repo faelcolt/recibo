@@ -65,7 +65,7 @@ function Cabecalho() {
                     name='data'
                     id='data'
                     defaultValue={hoje}
-                    style={{ minWidth: '85px' }}
+                    style={{ minWidth: '85px', marginLeft: '4px' }}
                 />
             </div>
         </>
