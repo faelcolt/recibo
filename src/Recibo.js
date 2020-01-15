@@ -4,7 +4,7 @@ import cabeçalho from './images/cabecalho.jpeg';
 
 function Recibo() {
     return (
-        <div style={{ margin: '8px' }}>
+        <div class='main'>
             <input type='file' name='imagem' style={{ display: 'none' }} />
 
             <div style={{ width: '100%' }}>
