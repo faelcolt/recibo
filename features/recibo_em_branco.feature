@@ -3,10 +3,11 @@ Funcionalidade: Recibo em Branco
     Paulo deseja ter um recibo sempre limpo para rápido preenchimento e posterior impressão.
 
     Cenário: Recibo em branco para rápido preenchimento
-        Dada a página de recibo acessada
+        Dado o acesso via dispositivo 'não móvel' de dimensões 800px por 600px
+        Quando a página de recibo é acessada
         Então a página deve ter o título "Recibo"
-        E a página deve possuir uma margem mínima de 8px
-        E a página deve possuir largura máxima de 680px
+        E o conteúdo não deve ultrapassar a margem de 8px
+        E o conteúdo deve ter largura máxima de 680px
         E a página possui botão imprimir que invoca impressão do navegador
         E os campos devem possuir texto de tamanho 16px
         E deve existir uma imagem no cabeçalho

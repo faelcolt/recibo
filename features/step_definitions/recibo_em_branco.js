@@ -1,27 +1,57 @@
-const { Given, Then, Before, BeforeAll, After, AfterAll } = require('cucumber');
+const { Given, When, Then, After } = require('cucumber');
 const puppeteer = require('puppeteer');
 const assert = require('assert');
 
-let browser;
-
-BeforeAll({ timeout: 10000 }, async function() {
-    browser = await puppeteer.launch({ headless: true });
-});
-
-AfterAll(async function() {
-    await browser.close();
-});
-
-Before({ timeout: 10000 }, async function() {
-    this.page = await browser.newPage();
-});
-
 After(async function() {
-    await this.page.close();
+    if (this.page) {
+        await this.page.close();
+        await this.browser.close();
+    }
 });
 
-Given('a página de recibo acessada', async function() {
+Given(
+    'o acesso via dispositivo {string} de dimensões {int}px por {int}px',
+    async function(mobile, x, y) {
+        switch (mobile) {
+            case 'móvel':
+                this.isMobile = true;
+                break;
+            case 'não móvel':
+                this.isMobile = true;
+                break;
+            default:
+                return 'pending';
+        }
+        this.width = x;
+        this.height = y;
+    }
+);
+
+When('a página de recibo é acessada', { timeout: 30000 }, async function() {
+    this.browser = await puppeteer.launch({
+        defaultViewport: {
+            width: this.width,
+            height: this.height,
+            isMobile: this.isMobile,
+        },
+        mobileheadless: true,
+    });
+
+    this.page = await this.browser.newPage();
+
     await this.page.goto('http://localhost:3000');
+});
+
+Then('a página deve ter o título {string}', async function(expected) {
+    const título = await this.page.evaluate(() => document.title);
+    assert.equal(título, expected);
+});
+
+Then('o conteúdo não deve ultrapassar a margem de {int}px', async function(
+    margem
+) {
+    // Write code here that turns the phrase above into concrete actions
+    return 'pending';
 });
 
 Then('deve existir uma imagem no cabeçalho', async function() {
