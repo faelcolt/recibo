@@ -6,6 +6,7 @@ Funcionalidade: Recibo em Branco
         Dado um dispositivo 'comum' de 800px por 600px
         Quando a página do recibo é acessada
         Então o conteúdo não deve ultrapassar a margem de 8px
+        E o conteúdo não deve ultrapassar 680px de largura
         E os campos devem possuir texto de pelo menos 16px
         E deve existir uma imagem no cabeçalho
         E no cabeçalho devem existir campos vazios para: "nome, endereço, telefone"
@@ -17,10 +18,10 @@ Funcionalidade: Recibo em Branco
 
     Cenário: Recibo em branco para rápido preenchimento
         Dado um dispositivo 'móvel' de 320px por 568px
-        Quando a página de recibo é acessada
+        Quando a página do recibo é acessada
         Então o conteúdo não deve ultrapassar a margem de 8px
         Então a tabela deve estar em um componente de no máximo 320px
 
     Cenário: Impressão
-        Quando a página de recibo é acessada
+        Quando a página do recibo é acessada
         Então a página possui botão imprimir que invoca impressão do navegador
