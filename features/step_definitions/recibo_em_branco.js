@@ -1,15 +1,35 @@
-const { Given, When, Then, After } = require('cucumber');
+const {
+    Given,
+    When,
+    Then,
+    After,
+    Before,
+    BeforeAll,
+    AfterAll,
+} = require('cucumber');
 const puppeteer = require('puppeteer');
 const assert = require('assert');
 
-After(async function() {
-    if (this.page) {
-        await this.page.close();
-        await this.browser.close();
-    }
+let browser;
+BeforeAll(async function() {
+    browser = await puppeteer.launch({
+        headless: true,
+    });
 });
 
-Given('um navegador {string} de {int}px por {int}px', async function(
+AfterAll(async function() {
+    await browser.close();
+});
+
+Before(async function() {
+    this.page = await browser.newPage();
+});
+
+After(async function() {
+    await this.page.close();
+});
+
+Given('um dispositivo {string} de {int}px por {int}px', async function(
     dispositivo,
     x,
     y
@@ -21,29 +41,38 @@ Given('um navegador {string} de {int}px por {int}px', async function(
     this.isMobile = isMobile[dispositivo];
     this.width = x;
     this.height = y;
+    let { width, height } = this;
+    console.log({ width, height });
 });
 
 When('a página do recibo é acessada', { timeout: 30000 }, async function() {
-    this.browser = await puppeteer.launch({
-        defaultViewport: {
-            width: this.width,
-            height: this.height,
-            isMobile: this.isMobile,
-        },
-        mobileheadless: true,
+    this.page.setViewport({
+        width: this.width,
+        height: this.height,
+        isMobile: this.isMobile,
     });
-
-    this.page = await this.browser.newPage();
-
     await this.page.goto('http://localhost:3000');
 });
 
 Then('o conteúdo não deve ultrapassar a margem de {int}px', async function(
     margem
 ) {
-    // Esboço do que deve ser
-    //a = Array.from($0.children)
-    //a = a.map(b=>b.getBoundingClientRect())
+    //Margens efetivas do componente principal: #main
+    const bound = await this.page.evaluate(() => {
+        const { width, height } = document.body.getBoundingClientRect(); //dimensões da página
+        return Array.from(document.querySelector('#main').children) //filhos do componente principal
+            .map(el => el.getBoundingClientRect()) //dimensões dos filhos do componente principal
+            .reduce((acc, cur) => {
+                //redução às menores dimensões
+                return {
+                    top: Math.min(acc.top, cur.top),
+                    left: Math.min(acc.left, cur.left),
+                    bottom: Math.min(height - acc.bottom, height - cur.bottom),
+                    right: Math.min(width - acc.right, width - cur.right),
+                };
+            });
+    });
+    console.log({ bound });
     return 'pending';
 });
 
