@@ -9,8 +9,6 @@ function Recibo() {
                 Imprimir
             </button>
 
-            <input type='file' name='imagem' style={{ display: 'none' }} />
-
             <div style={{ width: '100%' }}>
                 <img
                     style={{ width: '100%' }}
