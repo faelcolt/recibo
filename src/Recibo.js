@@ -4,7 +4,7 @@ import cabeçalho from './images/cabecalho.jpeg';
 
 function Recibo() {
     return (
-        <div class='main'>
+        <div id='main'>
             <button id='imprimir' onClick={() => window.print()}>
                 Imprimir
             </button>
@@ -73,7 +73,7 @@ function Cabecalho() {
 function Tabela() {
     const linhas = [];
     for (let i = 0; i < 18; i++) {
-        linhas.push(<Linha />);
+        linhas.push(<Linha key={i} />);
     }
     return (
         <div style={{ overflow: 'auto', marginTop: '8px' }}>
