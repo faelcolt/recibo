@@ -9,25 +9,21 @@ After(async function() {
     }
 });
 
-Given(
-    'o acesso via dispositivo {string} de dimensões {int}px por {int}px',
-    async function(mobile, x, y) {
-        switch (mobile) {
-            case 'móvel':
-                this.isMobile = true;
-                break;
-            case 'não móvel':
-                this.isMobile = true;
-                break;
-            default:
-                return 'pending';
-        }
-        this.width = x;
-        this.height = y;
-    }
-);
+Given('um navegador {string} de {int}px por {int}px', async function(
+    dispositivo,
+    x,
+    y
+) {
+    const isMobile = {
+        comum: false,
+        móvel: true,
+    };
+    this.isMobile = isMobile[dispositivo];
+    this.width = x;
+    this.height = y;
+});
 
-When('a página de recibo é acessada', { timeout: 30000 }, async function() {
+When('a página do recibo é acessada', { timeout: 30000 }, async function() {
     this.browser = await puppeteer.launch({
         defaultViewport: {
             width: this.width,
@@ -42,15 +38,12 @@ When('a página de recibo é acessada', { timeout: 30000 }, async function() {
     await this.page.goto('http://localhost:3000');
 });
 
-Then('a página deve ter o título {string}', async function(expected) {
-    const título = await this.page.evaluate(() => document.title);
-    assert.equal(título, expected);
-});
-
 Then('o conteúdo não deve ultrapassar a margem de {int}px', async function(
     margem
 ) {
-    // Write code here that turns the phrase above into concrete actions
+    // Esboço do que deve ser
+    //a = Array.from($0.children)
+    //a = a.map(b=>b.getBoundingClientRect())
     return 'pending';
 });
 
