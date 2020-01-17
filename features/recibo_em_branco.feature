@@ -11,7 +11,7 @@ Funcionalidade: Recibo em Branco
         E a página possui botão imprimir que invoca impressão do navegador
         E os campos devem possuir texto de tamanho 16px
         E deve existir uma imagem no cabeçalho
-        E no cabeçalho devem existir campos vazios para: "imagem, nome, endereço, telefone"
+        E no cabeçalho devem existir campos vazios para: "nome, endereço, telefone"
         E o campo data deve conter a data de hoje
         E a tabela deve conter cabeçalho com "Qtd., Descrição, Valor Unitário, Valor Total"
         E o corpo da tabela deve ter sete linhas 
