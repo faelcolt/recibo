@@ -25,13 +25,7 @@ function Recibo() {
 }
 
 function Cabecalho() {
-    const p2 = p => (p < 10 ? '0' + p : p);
-
-    const data = new Date();
-    const ano = data.getFullYear();
-    const mes = p2(data.getMonth() + 1);
-    const dia = p2(data.getDate());
-    const hoje = `${dia}/${mes}/${ano}`;
+    const hoje = new Date().toLocaleDateString('pt-BR');
 
     return (
         <>
