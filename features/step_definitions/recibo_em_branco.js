@@ -10,6 +10,8 @@ const {
 const puppeteer = require('puppeteer');
 const assert = require('assert');
 
+const pixel_to_int = s => +s.match(/\d+/g)[0];
+
 let browser;
 BeforeAll(async function() {
     browser = await puppeteer.launch({
@@ -41,15 +43,13 @@ Given('um dispositivo {string} de {int}px por {int}px', async function(
     this.isMobile = isMobile[dispositivo];
     this.width = x;
     this.height = y;
-    let { width, height } = this;
-    console.log({ width, height });
 });
 
 When('a página do recibo é acessada', { timeout: 30000 }, async function() {
-    this.page.setViewport({
-        width: this.width,
-        height: this.height,
-        isMobile: this.isMobile,
+    await this.page.setViewport({
+        width: this.width || 800,
+        height: this.height || 600,
+        isMobile: !!this.isMobile,
     });
     await this.page.goto('http://localhost:3000');
 });
@@ -58,7 +58,7 @@ Then('o conteúdo não deve ultrapassar a margem de {int}px', async function(
     margem
 ) {
     //Margens efetivas do componente principal: #main
-    const bound = await this.page.evaluate(() => {
+    const { top, left, bottom, right } = await this.page.evaluate(() => {
         const { width, height } = document.body.getBoundingClientRect(); //dimensões da página
         return Array.from(document.querySelector('#main').children) //filhos do componente principal
             .map(el => el.getBoundingClientRect()) //dimensões dos filhos do componente principal
@@ -72,16 +72,44 @@ Then('o conteúdo não deve ultrapassar a margem de {int}px', async function(
                 };
             });
     });
-    console.log({ bound });
-    return 'pending';
+
+    assert.ok(top >= margem, `top(${top}) < margem(${margem})px`);
+    assert.ok(left >= margem, `left(${left}) < margem(${margem})px`);
+    assert.ok(bottom >= margem, `bottom(${bottom}) < margem(${margem})px`);
+    assert.ok(right >= margem, `right(${right}) < margem(${margem})px`);
+});
+
+Then('o conteúdo não deve ultrapassar {int}px de largura', async function(
+    expected
+) {
+    const width_px = await this.page.evaluate(
+        () => getComputedStyle(document.querySelector('#main')).width
+    );
+    const width = pixel_to_int(width_px);
+
+    assert.ok(
+        width <= expected,
+        `width(${width}) > largura_máx(${expected})px`
+    );
+});
+
+Then('os campos devem possuir texto de pelo menos 16px', async function() {
+    const min_fontSize = await this.page.evaluate(() => {
+        const szs = Array.from(document.querySelectorAll('[type="text"]')) //elementos
+            .map(e => getComputedStyle(e).fontSize) // tamanhos em pixels
+            .map(s => +s.match(/\d+/g)[0]); // tamanhos inteiros
+        return Math.min(...szs);
+    });
+
+    assert.ok(min_fontSize => 16, `min_fontSize(${min_fontSize}) < 16`);
 });
 
 Then('deve existir uma imagem no cabeçalho', async function() {
-    const imagem = await this.page.$('img');
+    const imagem = await this.page.$('#img-cabecalho');
     assert.ok(!!imagem);
 });
 
-Then('no cabeçalho devem existir campos para: {string}', async function(
+Then('no cabeçalho devem existir campos vazios para: {string}', async function(
     expectd
 ) {
     const campos = await this.page.$$('input');
@@ -95,16 +123,23 @@ Then('no cabeçalho devem existir campos para: {string}', async function(
     this.fields = expectd.split(',').map(f => f.trim());
     for (const field of this.fields) {
         assert.ok(!!this.campos[field], `Campo ${field} não existe.`);
-    }
-});
 
-Then('os campos devem estar vazios', async function() {
-    for (const field of this.fields) {
         assert.ok(
             await campoVazio(this.campos[field]),
             `Campo ${field} deveria estar vazio.`
         );
     }
+});
+
+Then('o campo data deve conter a data de hoje', async function() {
+    const { data, hoje } = await this.page.evaluate(() => {
+        return {
+            data: document.querySelector('[name="data"]').value,
+            hoje: new Date().toLocaleDateString('pt-BR'),
+        };
+    });
+
+    assert.equal(data, hoje);
 });
 
 Then('a tabela deve conter cabeçalho com {string}', async function(expected) {
@@ -124,44 +159,40 @@ Then('a tabela deve conter cabeçalho com {string}', async function(expected) {
     }
 });
 
-Then('o corpo da tabela deve ter sete linhas', async function() {
-    const corpo = await this.tabela.$('tbody');
-    this.linhas = await corpo.$$('tr');
-    assert.equal(
-        this.linhas.length,
-        7,
-        `O corpo da tabela está com ${this.linhas.length} linhas.`
-    );
-});
-
-Then('cada linha deve ter quatro campos vazios', async function() {
-    for (let i = 0; i < this.linhas.length; i++) {
-        const linha = this.linhas[i];
-        const campos = await linha.$$('input');
-
-        assert.equal(
-            campos.length,
-            4,
-            `A linha ${i} possui ${campos.length} campos.`
+Then(
+    'o corpo da tabela deve ter linhas com todos os campos vazios',
+    async function() {
+        const corpo = await this.tabela.$('tbody');
+        this.linhas = await corpo.$$('tr');
+        assert.ok(
+            this.linhas.length >= 1,
+            `O corpo da tabela está com ${this.linhas.length} linhas.`
         );
 
-        for (let j = 0; j < campos.length; j++) {
-            const campo = campos[j];
-            assert(await campoVazio(campo), `campo ${j} da linha ${i}.`);
+        for (let i = 0; i < this.linhas.length; i++) {
+            const linha = this.linhas[i];
+            const campos = await linha.$$('input');
+
+            for (let j = 0; j < campos.length; j++) {
+                const campo = campos[j];
+                assert(await campoVazio(campo), `campo ${j} da linha ${i}.`);
+            }
         }
     }
-});
+);
 
-Then('o rodapé deve ter uma linha contendo {string}', async function(expected) {
-    this.rodapé = await this.tabela.$('tfoot');
-    const texto = await this.rodapé.$eval('tr', el => el.innerText.trim());
-    assert.equal(texto, expected, `${texto} != ${expected}`);
-});
+Then(
+    'o rodapé deve ter uma linha contendo "Total Geral" vazio',
+    async function() {
+        this.rodapé = await this.tabela.$('tfoot');
+        const linha = await this.rodapé.$('tr');
 
-Then('um campo de total geral vazio', async function() {
-    const campo = await this.rodapé.$('input');
-    assert.ok(await campoVazio(campo), `Campo não vazio.`);
-});
+        assert.ok(!!linha, `linha não existe`);
+
+        const campo = await linha.$('input');
+        assert.ok(await campoVazio(campo), `Campo não vazio.`);
+    }
+);
 
 async function campoVazio(campo) {
     const value = await campo.evaluate(c => c.value);
