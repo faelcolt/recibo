@@ -11,6 +11,7 @@ function Recibo() {
 
             <div style={{ width: '100%' }}>
                 <img
+                    id='img-cabecalho'
                     style={{ width: '100%' }}
                     src={cabeçalho}
                     alt='Imagem do Cabeçalho'
