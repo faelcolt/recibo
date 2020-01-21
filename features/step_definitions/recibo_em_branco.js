@@ -6,6 +6,7 @@ const {
     Before,
     BeforeAll,
     AfterAll,
+    setDefaultTimeout,
 } = require('cucumber');
 const puppeteer = require('puppeteer');
 const assert = require('assert');
@@ -14,8 +15,11 @@ const pixel_to_int = s => +s.match(/\d+/g)[0];
 
 let browser;
 BeforeAll(async function() {
+    setDefaultTimeout(30000);
     browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
+        slowMo: 1000,
+        devtools: true,
     });
 });
 
@@ -23,8 +27,24 @@ AfterAll(async function() {
     await browser.close();
 });
 
-Before(async function() {
+Before({ timeout: 30000 }, async function() {
     this.page = await browser.newPage();
+
+    //Identificação da chamada do evento de impressão
+    this.print_called = false;
+    const printIdentify = () => (this.print_called = true);
+    await this.page.exposeFunction('printIdentify', printIdentify);
+    await this.page.evaluateOnNewDocument(() => {
+        /*window.print = () => {
+            //printIdentify();
+            console.log('passou aqui');
+            //window.print();
+        };*/
+        window.addEventListener('beforeprint', evt => {
+            printIdentify();
+            console.log('beforeprint passou aqui');
+        });
+    });
 });
 
 After(async function() {
@@ -193,6 +213,20 @@ Then(
         assert.ok(await campoVazio(campo), `Campo não vazio.`);
     }
 );
+
+When('o botão de impressão é acionado', async function() {
+    await this.page.waitFor('#imprimir');
+    console.log('elemento identificado');
+
+    this.page.click('#imprimir');
+    await this.page.waitFor(30000);
+});
+
+Then('a página deve invocar a impressão do navegador', async function() {
+    //await this.page.waitFor(print_called => print_called, this.print_called);
+    await this.page.waitFor(2000);
+    assert.ok(this.print_called, 'Impressão não foi invocada');
+});
 
 async function campoVazio(campo) {
     const value = await campo.evaluate(c => c.value);
