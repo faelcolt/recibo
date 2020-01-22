@@ -13,13 +13,18 @@ const assert = require('assert');
 
 const pixel_to_int = s => +s.match(/\d+/g)[0];
 
+/**
+ * Deve ser chamado antes do BeforeAll para garantir a compatibilidade com o
+ * timeout padrão do puppeteer mesmo no BeforeAll.
+ */
+setDefaultTimeout(30000);
+
 let browser;
 BeforeAll(async function() {
-    setDefaultTimeout(30000);
     browser = await puppeteer.launch({
-        headless: false,
-        slowMo: 1000,
-        devtools: true,
+        headless: true,
+        //slowMo: 200,
+        //devtools: true,
     });
 });
 
@@ -27,23 +32,22 @@ AfterAll(async function() {
     await browser.close();
 });
 
-Before({ timeout: 30000 }, async function() {
+Before(async function() {
     this.page = await browser.newPage();
 
     //Identificação da chamada do evento de impressão
     this.print_called = false;
     const printIdentify = () => (this.print_called = true);
     await this.page.exposeFunction('printIdentify', printIdentify);
+    //Substituição da chamada da impressão
     await this.page.evaluateOnNewDocument(() => {
-        /*window.print = () => {
-            //printIdentify();
-            console.log('passou aqui');
-            //window.print();
-        };*/
-        window.addEventListener('beforeprint', evt => {
+        /**const print_original = window.print; //comentado até que o puppeteer
+         * dê suporte a janela de diálogo de impressão
+         */
+        window.print = () => {
             printIdentify();
-            console.log('beforeprint passou aqui');
-        });
+            //print_original();
+        };
     });
 });
 
@@ -216,15 +220,10 @@ Then(
 
 When('o botão de impressão é acionado', async function() {
     await this.page.waitFor('#imprimir');
-    console.log('elemento identificado');
-
-    this.page.click('#imprimir');
-    await this.page.waitFor(30000);
+    await this.page.click('#imprimir');
 });
 
 Then('a página deve invocar a impressão do navegador', async function() {
-    //await this.page.waitFor(print_called => print_called, this.print_called);
-    await this.page.waitFor(2000);
     assert.ok(this.print_called, 'Impressão não foi invocada');
 });
 
