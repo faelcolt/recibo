@@ -69,7 +69,7 @@ Given('um dispositivo {string} de {int}px por {int}px', async function(
     this.height = y;
 });
 
-When('a página do recibo é acessada', { timeout: 30000 }, async function() {
+When('a página do recibo é acessada', async function() {
     await this.page.setViewport({
         width: this.width || 800,
         height: this.height || 600,
