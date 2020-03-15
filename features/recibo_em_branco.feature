@@ -21,6 +21,7 @@ Funcionalidade: Recibo em Branco
         Então o conteúdo não deve ultrapassar a margem de 8px
         Então o conteúdo não deve ultrapassar 680px de largura
 
+    @print
     Cenário: Impressão
         Quando a página do recibo é acessada
         Então a página possui botão imprimir que invoca impressão do navegador

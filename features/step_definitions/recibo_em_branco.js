@@ -6,16 +6,25 @@ const {
     Before,
     BeforeAll,
     AfterAll,
+    setDefaultTimeout,
 } = require('cucumber');
 const puppeteer = require('puppeteer');
 const assert = require('assert');
 
 const pixel_to_int = s => +s.match(/\d+/g)[0];
 
+/**
+ * Deve ser chamado antes do BeforeAll para garantir a compatibilidade com o
+ * timeout padrão do puppeteer mesmo no BeforeAll.
+ */
+setDefaultTimeout(30000);
+
 let browser;
 BeforeAll(async function() {
     browser = await puppeteer.launch({
         headless: true,
+        //slowMo: 200,
+        //devtools: true,
     });
 });
 
@@ -25,6 +34,21 @@ AfterAll(async function() {
 
 Before(async function() {
     this.page = await browser.newPage();
+
+    //Identificação da chamada do evento de impressão
+    this.print_called = false;
+    const printIdentify = () => (this.print_called = true);
+    await this.page.exposeFunction('printIdentify', printIdentify);
+    //Substituição da chamada da impressão
+    await this.page.evaluateOnNewDocument(() => {
+        /**const print_original = window.print; //comentado até que o puppeteer
+         * dê suporte a janela de diálogo de impressão
+         */
+        window.print = () => {
+            printIdentify();
+            //print_original();
+        };
+    });
 });
 
 After(async function() {
@@ -45,7 +69,7 @@ Given('um dispositivo {string} de {int}px por {int}px', async function(
     this.height = y;
 });
 
-When('a página do recibo é acessada', { timeout: 30000 }, async function() {
+When('a página do recibo é acessada', async function() {
     await this.page.setViewport({
         width: this.width || 800,
         height: this.height || 600,
@@ -193,6 +217,15 @@ Then(
         assert.ok(await campoVazio(campo), `Campo não vazio.`);
     }
 );
+
+When('o botão de impressão é acionado', async function() {
+    await this.page.waitFor('#imprimir');
+    await this.page.click('#imprimir');
+});
+
+Then('a página deve invocar a impressão do navegador', async function() {
+    assert.ok(this.print_called, 'Impressão não foi invocada');
+});
 
 async function campoVazio(campo) {
     const value = await campo.evaluate(c => c.value);

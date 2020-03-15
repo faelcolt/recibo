@@ -20,4 +20,4 @@ Há um botão para impressão do recibo e possível geração de arquivo PDF.
     -   Dispositivo do usuário;
     -   Google Firebase;
 -   Assinatura do emitente (sugerido por Jeferson Leonardo)
--   Assinatura digital (sugerido por Jeferson Leonardo)
+-   # Assinatura digital (sugerido por Jeferson Leonardo)
