@@ -1,9 +1,11 @@
-# Sistema de Recibos (0.1.0)
+# Sistema de Recibos (0.2.0)
 
 Link para aplicação: http://gleider.ml/recibo
 Código: https://github.com/gleiderr/recibo
 
 Sistema para preenchimento rápido e posterior impressão de recibo de balcão.
+
+Esse sistema pode ser acessado offline. Para isso basta instalá-lo em seu dispositivo utilizando o botão instalar no navegador do seu smartphone ou na barra de endereço do navegador do seu computador
 
 Cada recibo contém cabeçalho com **imagem**, **data da emissão** e **dados do cliente** com: **nome**, **endereço** e **telefone**.
 

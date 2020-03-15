@@ -24,3 +24,9 @@ Funcionalidade: Recibo em Branco
     Cenário: Impressão
         Quando a página do recibo é acessada
         Então a página possui botão imprimir que invoca impressão do navegador
+
+    Cenário: Acesso offline
+        Quando a página do recibo é acessada
+        E a página é instalada  
+        E o dispositivo é 'desconectado'
+        Então o conteúdo deve ser exibido
