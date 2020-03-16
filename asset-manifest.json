@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/recibo/static/css/main.f2e51fcb.chunk.css",
-    "main.js": "/recibo/static/js/main.94ea77f6.chunk.js",
-    "main.js.map": "/recibo/static/js/main.94ea77f6.chunk.js.map",
+    "main.js": "/recibo/static/js/main.b3784401.chunk.js",
+    "main.js.map": "/recibo/static/js/main.b3784401.chunk.js.map",
     "runtime-main.js": "/recibo/static/js/runtime-main.c4d4ced2.js",
     "runtime-main.js.map": "/recibo/static/js/runtime-main.c4d4ced2.js.map",
     "static/js/2.1549f768.chunk.js": "/recibo/static/js/2.1549f768.chunk.js",
     "static/js/2.1549f768.chunk.js.map": "/recibo/static/js/2.1549f768.chunk.js.map",
     "index.html": "/recibo/index.html",
-    "precache-manifest.81e14ed19316c3e991c4edab0da7867e.js": "/recibo/precache-manifest.81e14ed19316c3e991c4edab0da7867e.js",
+    "precache-manifest.00ee0e42d650659eceb903ca8d741832.js": "/recibo/precache-manifest.00ee0e42d650659eceb903ca8d741832.js",
     "service-worker.js": "/recibo/service-worker.js",
     "static/css/main.f2e51fcb.chunk.css.map": "/recibo/static/css/main.f2e51fcb.chunk.css.map",
     "static/js/2.1549f768.chunk.js.LICENSE": "/recibo/static/js/2.1549f768.chunk.js.LICENSE",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.c4d4ced2.js",
     "static/js/2.1549f768.chunk.js",
     "static/css/main.f2e51fcb.chunk.css",
-    "static/js/main.94ea77f6.chunk.js"
+    "static/js/main.b3784401.chunk.js"
   ]
 }
