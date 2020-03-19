@@ -2,7 +2,7 @@
     "name": "recibo",
     "version": "0.1.0",
     "description": "Sistema simples para emissão de recibo de balcão",
-    "homepage": "http://gleiderr.github.io/recibo",
+    "homepage": "https://gleider-dev.firebaseapp.com/",
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/gleiderr/recibo/issues"
@@ -27,7 +27,7 @@
         "test": "cucumber-js",
         "eject": "react-scripts eject",
         "predeploy": "npm run build",
-        "deploy": "gh-pages -d build"
+        "deploy": "firebase deploy"
     },
     "repository": {
         "type": "git",
