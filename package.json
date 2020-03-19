@@ -2,7 +2,7 @@
     "name": "recibo",
     "version": "0.1.0",
     "description": "Sistema simples para emissão de recibo de balcão",
-    "homepage": "https://gleider-dev.firebaseapp.com/",
+    "homepage": "https://gleider-dev.firebaseapp.com",
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/gleiderr/recibo/issues"
