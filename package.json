@@ -27,7 +27,8 @@
         "test": "cucumber-js",
         "eject": "react-scripts eject",
         "predeploy": "npm run build",
-        "deploy": "firebase deploy"
+        "deploy": "firebase deploy",
+        "only_deploy": "firebase deploy"
     },
     "repository": {
         "type": "git",
