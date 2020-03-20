@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+    "short_name": "Recibo - Velits",
+    "name": "Sistema de Recibos - Velits",
   "icons": [
     {
       "src": "favicon.ico",
