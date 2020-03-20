@@ -24,8 +24,8 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
+        "serve": "serve -s build",
         "test": "cucumber-js",
-        "eject": "react-scripts eject",
         "predeploy": "npm run build",
         "deploy": "firebase deploy",
         "only_deploy": "firebase deploy"
